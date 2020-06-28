@@ -7,23 +7,23 @@
   var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var fragment = document.createDocumentFragment();
 
-  var getPinElements = function (template, objectArray) {
+  var getPinElements = function (template, pins) {
     for (var i = 0; i < window.data.HOTELS_COUNT; i++) {
-      var object = objectArray[i];
-      var element = template.cloneNode(true);
+      var pin = pins[i];
+      var pinElement = template.cloneNode(true);
 
-      element.style.left = window.data.getArrPins()[i].location.x;
-      element.style.top = window.data.getArrPins()[i].location.y;
+      pinElement.style.left = window.data.getArrPins()[i].location.x;
+      pinElement.style.top = window.data.getArrPins()[i].location.y;
 
-      element.querySelector('img').setAttribute('src', object.author.avatar);
-      element.querySelector('img').setAttribute('alt', object.offer.title);
+      pinElement.querySelector('img').setAttribute('src', pin.author.avatar);
+      pinElement.querySelector('img').setAttribute('alt', pin.offer.title);
 
-      fragment.appendChild(element);
+      fragment.appendChild(pinElement);
     }
-    return element;
+    return pinElement;
   };
 
-  var getPins = function () {
+  var renderPins = function () {
     getPinElements(mapPinTemplate, window.data.getArrPins());
     insertElements(mapPins);
   };
@@ -33,6 +33,6 @@
   };
 
   window.pin = {
-    getPins: getPins
+    renderPins: renderPins
   };
 })();

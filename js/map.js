@@ -33,14 +33,14 @@
   var activeMap = function () {
     map.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
-    window.pin.getPins();
+    window.pin.renderPins();
     unlockAdForm();
   };
 
   mapPinMain.addEventListener('mousedown', function () {
     if (event.which === 1) {
       activeMap();
-      getAdressValue(START_COORDINATE.LEFT, START_COORDINATE.TOP, START_COORDINATE.GAP, START_COORDINATE.ARROW_GAP);
+      setAddressValue(START_COORDINATE.LEFT, START_COORDINATE.TOP, START_COORDINATE.GAP, START_COORDINATE.ARROW_GAP);
     }
   });
 
@@ -51,12 +51,12 @@
   });
 
 
-  var getAdressValue = function (pinX, pinY, shiftX, shiftY) {
-    var inputAdressValue = '' + (pinX + shiftX) + ', ' + (pinY + shiftY) + '';
-    inputAddress.setAttribute('value', inputAdressValue);
+  var setAddressValue = function (pinX, pinY, shiftX, shiftY) {
+    var inputAddressValue = '' + (pinX + shiftX) + ', ' + (pinY + shiftY) + '';
+    inputAddress.setAttribute('value', inputAddressValue);
   };
 
-  getAdressValue(START_COORDINATE.LEFT, START_COORDINATE.TOP, START_COORDINATE.GAP, START_COORDINATE.GAP);
+  setAddressValue(START_COORDINATE.LEFT, START_COORDINATE.TOP, START_COORDINATE.GAP, START_COORDINATE.GAP);
 
   window.map = {
     adForm: adForm
