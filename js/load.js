@@ -5,7 +5,7 @@
   var StatusCode = {
     OK: 200
   };
-  var TIMEOUT_IN_MS = 10000;
+  var REQUEST_TIMEOUT = 10000;
 
   window.load = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
@@ -25,7 +25,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = TIMEOUT_IN_MS;
+    xhr.timeout = REQUEST_TIMEOUT;
 
     xhr.open('GET', URL);
     xhr.send();
