@@ -16,6 +16,12 @@
     ARROW_GAP: 87
   };
 
+  var dataPins = [];
+
+  var onSuccess = function (data) {
+    dataPins = data;
+  };
+
   var disableAdForm = function () {
     for (var i = 0; i < adFormFieldsets.length; i++) {
       adFormFieldsets[i].setAttribute('disabled', true);
@@ -33,7 +39,7 @@
   var activeMap = function () {
     map.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
-    window.pin.renderPins();
+    window.pin.renderPins(dataPins);
     unlockAdForm();
   };
 
@@ -61,4 +67,6 @@
   window.map = {
     adForm: adForm
   };
+
+  window.load(onSuccess);
 })();

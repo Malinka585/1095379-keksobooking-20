@@ -12,8 +12,8 @@
       var pin = pins[i];
       var pinElement = template.cloneNode(true);
 
-      pinElement.style.left = window.data.getArrPins()[i].location.x;
-      pinElement.style.top = window.data.getArrPins()[i].location.y;
+      pinElement.style.left = pin.location.x + 'px';
+      pinElement.style.top = pin.location.y + 'px';
 
       pinElement.querySelector('img').setAttribute('src', pin.author.avatar);
       pinElement.querySelector('img').setAttribute('alt', pin.offer.title);
@@ -23,8 +23,8 @@
     return pinElement;
   };
 
-  var renderPins = function () {
-    getPinElements(mapPinTemplate, window.data.getArrPins());
+  var renderPins = function (data) {
+    getPinElements(mapPinTemplate, data);
     insertElements(mapPins);
   };
 
