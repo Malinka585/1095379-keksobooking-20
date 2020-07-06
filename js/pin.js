@@ -8,7 +8,7 @@
   var fragment = document.createDocumentFragment();
 
   var getPinElements = function (template, pins) {
-    for (var i = 0; i < window.data.HOTELS_COUNT; i++) {
+    for (var i = 0; i < pins.length; i++) {
       var pin = pins[i];
       var pinElement = template.cloneNode(true);
 
@@ -33,6 +33,7 @@
   };
 
   window.pin = {
-    renderPins: renderPins
+    renderPins: renderPins,
+    mapPins: mapPins
   };
 })();
