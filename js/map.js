@@ -16,11 +16,35 @@
     ARROW_GAP: 87
   };
 
+  var clearDomElements = function (parentElement, tagElement) {
+    var domElement = parentElement.querySelectorAll(tagElement);
+    domElement.forEach(function (node) {
+      if (!node.classList.contains('map__pin--main')) {
+        node.parentNode.removeChild(node);
+      }
+    });
+  };
+
   var dataPins = [];
 
   var onSuccess = function (data) {
     dataPins = data;
   };
+
+  var housingType = document.querySelector('#housing-type');
+
+  housingType.addEventListener('change', function () {
+    var dataPinsCopy = dataPins.slice();
+    clearDomElements(window.pin.mapPins, 'button');
+    if (housingType.value !== 'any') {
+      var dataPinsHousing = dataPinsCopy.filter(function (housingPins) {
+        return housingPins.offer.type === housingType.value;
+      });
+      window.pin.renderPins(dataPinsHousing.slice(0, 5));
+    } else {
+      window.pin.renderPins(dataPinsCopy.slice(0, 5));
+    }
+  });
 
   var disableAdForm = function () {
     for (var i = 0; i < adFormFieldsets.length; i++) {
@@ -39,7 +63,7 @@
   var activeMap = function () {
     map.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
-    window.pin.renderPins(dataPins);
+    window.pin.renderPins(dataPins.slice(0, 5));
     unlockAdForm();
   };
 
@@ -64,9 +88,11 @@
 
   setAddressValue(START_COORDINATE.LEFT, START_COORDINATE.TOP, START_COORDINATE.GAP, START_COORDINATE.GAP);
 
+  window.load(onSuccess);
+
   window.map = {
-    adForm: adForm
+    adForm: adForm,
+    dataPins: dataPins
   };
 
-  window.load(onSuccess);
 })();
