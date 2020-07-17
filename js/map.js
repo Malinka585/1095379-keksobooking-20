@@ -2,7 +2,6 @@
 
 (function () {
 
-  var map = document.querySelector('.map');
   var mapPinMain = document.querySelector('.map__pin--main');
   var adForm = document.querySelector('.ad-form');
   var adFormFieldsets = adForm.querySelectorAll('fieldset');
@@ -16,15 +15,6 @@
     ARROW_GAP: 87
   };
 
-  var clearDomElements = function (parentElement, tagElement) {
-    var domElement = parentElement.querySelectorAll(tagElement);
-    domElement.forEach(function (node) {
-      if (!node.classList.contains('map__pin--main')) {
-        node.parentNode.removeChild(node);
-      }
-    });
-  };
-
   var dataPins = [];
 
   var onSuccess = function (data) {
@@ -35,7 +25,7 @@
 
   housingType.addEventListener('change', function () {
     var dataPinsCopy = dataPins.slice();
-    clearDomElements(window.pin.mapPins, 'button');
+    window.util.clearDomElements(window.pin.mapPins, 'button');
     if (housingType.value !== 'any') {
       var dataPinsHousing = dataPinsCopy.filter(function (housingPins) {
         return housingPins.offer.type === housingType.value;
@@ -61,7 +51,7 @@
   };
 
   var activeMap = function () {
-    map.classList.remove('map--faded');
+    window.pin.map.classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
     window.pin.renderPins(dataPins.slice(0, 5));
     unlockAdForm();
@@ -79,7 +69,6 @@
       activeMap();
     }
   });
-
 
   var setAddressValue = function (pinX, pinY, shiftX, shiftY) {
     var inputAddressValue = '' + (pinX + shiftX) + ', ' + (pinY + shiftY) + '';
