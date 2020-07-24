@@ -23,10 +23,13 @@ window.util = (function () {
       }
     },
 
-    clearDomElements: function (parentElement, tagElement) {
+    clearDomElements: function (parentElement, tagElement, exception) {
       var domElement = parentElement.querySelectorAll(tagElement);
       domElement.forEach(function (node) {
-        node.parentNode.removeChild(node);
+
+        if (!node.classList.contains(exception)) {
+          node.parentNode.removeChild(node);
+        }
       });
     }
 
