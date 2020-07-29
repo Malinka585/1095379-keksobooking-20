@@ -3,14 +3,18 @@
 (function () {
   var main = document.querySelector('main');
 
-  var messageWindow = function (result) {
-    var onWindowClick = function () {
+  var showMessageWindow = function (result) {
+    var onWindowClick = function (evt) {
+      var target = evt.target;
+      if (target.classList.contains(result + '__message')) {
+        return;
+      }
       window.util.clearDomElements(main, '.' + result);
       document.removeEventListener('keydown', onWindowClick);
     };
 
-    var onMessageEscPress = function (event) {
-      window.util.isEscEvent(event, closeMessage);
+    var onMessageEscPress = function (evt) {
+      window.util.isEscEvent(evt, closeMessage);
       document.removeEventListener('keydown', onMessageEscPress);
     };
 
@@ -27,16 +31,20 @@
   };
 
   var onSuccess = function () {
-    messageWindow('success');
+    showMessageWindow('success');
     window.form.resetForm();
+    window.card.closeCard();
+    window.form.getMinPrice(window.form.housingPriceFlat);
   };
 
   var onError = function () {
-    messageWindow('error');
+    showMessageWindow('error');
   };
 
-  window.map.adForm.addEventListener('submit', function (evt) {
+  var onFormSubmit = function (evt) {
     evt.preventDefault();
     window.post(new FormData(window.map.adForm), onSuccess, onError);
-  });
+  };
+
+  window.map.adForm.addEventListener('submit', onFormSubmit);
 })();

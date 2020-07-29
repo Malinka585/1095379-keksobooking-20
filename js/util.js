@@ -2,7 +2,7 @@
 
 window.util = (function () {
 
-  var KEY_CODE = {
+  var KeyCode = {
 
     ENTER: 13,
     ESC: 27
@@ -12,20 +12,20 @@ window.util = (function () {
   return {
 
     isEscEvent: function (evt, action) {
-      if (evt.keyCode === KEY_CODE.ESC) {
+      if (evt.keyCode === KeyCode.ESC) {
         action();
       }
     },
 
     isEnterEvent: function (evt, action) {
-      if (evt.keyCode === KEY_CODE.ENTER) {
+      if (evt.keyCode === KeyCode.ENTER) {
         action();
       }
     },
 
     clearDomElements: function (parentElement, tagElement, exception) {
-      var domElement = parentElement.querySelectorAll(tagElement);
-      domElement.forEach(function (node) {
+      var domElements = parentElement.querySelectorAll(tagElement);
+      domElements.forEach(function (node) {
 
         if (!node.classList.contains(exception)) {
           node.parentNode.removeChild(node);

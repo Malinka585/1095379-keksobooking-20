@@ -13,11 +13,11 @@
     'palace': 'Дворец'
   };
 
-  var renderFeatures = function (featuresLocation, featuresArray) {
+  var renderFeatures = function (featuresLocation, arrayFeatures) {
     window.util.clearDomElements(featuresLocation, 'li');
 
-    for (var i = 0; i < featuresArray.length; i++) {
-      featuresLocation.insertAdjacentHTML('afterbegin', '<li class="popup__feature popup__feature--' + featuresArray[i] + '"></li>');
+    for (var i = 0; i < arrayFeatures.length; i++) {
+      featuresLocation.insertAdjacentHTML('afterbegin', '<li class="popup__feature popup__feature--' + arrayFeatures[i] + '"></li>');
     }
   };
 
